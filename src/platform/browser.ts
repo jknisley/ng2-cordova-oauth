@@ -10,8 +10,9 @@ export class OauthBrowser extends Oauth {
       toolbar: 0,
     };
 
-    protected openDialog(url: string, params: Object, options: any = {}) {
-        const windowParams = this.addWindowRect(utils.defaults({ title: 'Authentication' }, params));
+    protected openDialog(url: string, params: any, options: any = {}) {
+        const defaultParams = (params.title) ? {} : { title: 'Authentication' };    // allows title to be overridden
+        const windowParams = this.addWindowRect(utils.defaults(defaultParams, params));
         const title = windowParams.title;
         delete windowParams.title;
 

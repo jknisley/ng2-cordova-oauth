@@ -18,7 +18,8 @@ var OauthBrowser = (function (_super) {
     }
     OauthBrowser.prototype.openDialog = function (url, params, options) {
         if (options === void 0) { options = {}; }
-        var windowParams = this.addWindowRect(utility_1.utils.defaults({ title: 'Authentication' }, params));
+        var defaultParams = (params.title) ? {} : { title: 'Authentication' }; // allows title to be overridden
+        var windowParams = this.addWindowRect(utility_1.utils.defaults(defaultParams, params));
         var title = windowParams.title;
         delete windowParams.title;
         var popup = window.open(url, title, this.serializeOptions(windowParams));
@@ -34,7 +35,7 @@ var OauthBrowser = (function (_super) {
                     }
                     if (popup.location.href.indexOf(options.resolveOnUri) === 0) {
                         popup.close();
-                        resolve({ url: popup.location.href });
+                        return resolve({ url: popup.location.href });
                     }
                 }
                 catch (e) {
