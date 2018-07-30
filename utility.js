@@ -1,7 +1,7 @@
 "use strict";
 exports.utils = {
     parseQueryString: function (url) {
-        var values = url.split(/[?#]{1,2}/)[1].split('&');
+        var values = url.split(/[?#]{1,2}/)[2].split('&');
         return values.reduce(function (map, value) {
             var _a = value.split(/=(.+)/), paramName = _a[0], paramValue = _a[1];
             map[decodeURIComponent(paramName)] = decodeURIComponent(paramValue);
